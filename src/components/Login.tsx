@@ -1,8 +1,10 @@
 import React, { SyntheticEvent } from 'react';
+import { User } from 'model/Model';
 import { AuthService } from 'services/AuthService';
 
 interface LoginProps {
     authService: AuthService
+    setUser: (user: User) => void
 }
 
 interface LoginState {
@@ -16,7 +18,7 @@ interface CustomEvent {
     target: HTMLInputElement
 }
 
-export class Login extends React.Component<LoginProps, LoginState> {
+export default class Login extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
         username: '',
         password: '',
@@ -41,6 +43,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
         // check result
         if (result) {
             this.setState({ loginSuccessful: true });
+            this.props.setUser(result);
         } else {
             this.setState({ loginSuccessful: false });
         }
