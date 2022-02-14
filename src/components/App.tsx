@@ -34,9 +34,15 @@ export default class App extends React.Component<{}, AppState>{
                         <Navbar user={this.state.user} />
                         <Routes>
                             <Route path='/' element={<Home />} />
-                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile">
+                                <Profile
+                                    authService={this.authService}
+                                    user={this.state.user} />
+                            </Route>
                             <Route path='/login'>
-                                <Login authService={this.authService} setUser={this.setUser} />
+                                <Login
+                                    authService={this.authService}
+                                    setUser={this.setUser} />
                             </Route>
                         </Routes>
                     </div>
